@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>Tree of Life Dashboard</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="index.html">
+					<span class="align-middle">Tree of Life</span>
+				</a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">Pages</li>
+
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="index.html">
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+						</a>
+					</li>
+
+
+				</ul>
+
+
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+								<div class="position-relative">
+									<i class="align-middle" data-feather="bell"></i>
+									<span class="indicator">2</span>
+								</div>
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+								<div class="dropdown-menu-header">
+									2 New Notifications
+								</div>
+								<div class="list-group">
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-success" data-feather="refresh-cw"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Firebase Updated</div>
+												<div class="text-muted small mt-1">Real-Time Data pulled successfully.</div>
+												<div class="text-muted small mt-1">5m ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-warning" data-feather="bell"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Maintenance</div>
+												<div class="text-muted small mt-1">No maintenance currently required.</div>
+												<div class="text-muted small mt-1">5m ago</div>
+											</div>
+										</div>
+									</a>
+									<!--<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-primary" data-feather="home"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">Login from 192.186.1.8</div>
+												<div class="text-muted small mt-1">5h ago</div>
+											</div>
+										</div>
+									</a>
+									<a href="#" class="list-group-item">
+										<div class="row g-0 align-items-center">
+											<div class="col-2">
+												<i class="text-success" data-feather="user-plus"></i>
+											</div>
+											<div class="col-10">
+												<div class="text-dark">New connection</div>
+												<div class="text-muted small mt-1">Christina accepted your request.</div>
+												<div class="text-muted small mt-1">14h ago</div>
+											</div>
+										</div>
+									</a>-->
+								</div>
+								<div class="dropdown-menu-footer">
+									<a href="#" class="text-muted">Close all notifications</a>
+								</div>
+							</div>
+						</li>
+
+
+
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3"><strong>Tree of Life</strong> Real-Time Data</h1>
+
+
+					<!--############################################################################-->
+					<!--############################################################################-->
+					<!-- map container -->
+					<div id="map_canvas"><noscript><p>JavaScript is required to render the Google Map.</p></noscript></div>
+					<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+					<style type="text/css">
+						html {
+							height: 100%;
+						}
+
+						body {
+							height: 100%;
+							margin: 0;
+							padding: 0;
+						}
+
+						#map_canvas {
+							width: 800px;
+							height: 600px;
+						}
+					</style>
+
+					<script type="text/javascript">function initialise() {
+							// create object literal to store map properties
+							var myOptions = {
+								zoom: 8 // set zoom level
+								, mapTypeId: google.maps.MapTypeId.ROADMAP // apply tile (options include ROADMAP, SATELLITE, HYBRID and TERRAIN)
+							};
+
+							// create map object and apply properties
+							var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+							// create map bounds object
+							var bounds = new google.maps.LatLngBounds();
+
+							// create array containing locations
+							var locations = [
+								[18.906438, 72.814472, 'Unit 1 - 89% full', './rtrash.svg'],
+								[18.906999, 72.816812, 'Unit 2 - 29% full', './gtrash.svg'],
+								[18.902478, 72.815011, 'Unit 3 - 92% full', './rtrash.svg'],
+								[18.904831, 72.815814, 'Unit 4 - 22% full', './gtrash.svg'],
+								[18.906944, 72.812568, 'Unit 5 - 90% full', './rtrash.svg'],
+								[18.909799, 72.813347, 'Unit 6 - 82% full', './rtrash.svg'],
+								[18.909573, 72.817241, 'Unit 7 - 81% full', './rtrash.svg'],
+								[18.910541, 72.820340, 'Unit 8 - 54% full', './gtrash.svg'],
+								[18.908372, 72.812453, 'Unit 9 - 95% full', './rtrash.svg'],
+								[18.909002, 72.811915, 'Unit 10 - 43% full', './gtrash.svg'],
+								[18.910176, 72.810239, 'Unit 11 - 31% full', './gtrash.svg'],
+								[18.907456, 72.809917, 'Unit 12 - 100% full', './rtrash.svg'],
+								[18.907476, 72.808061, 'Unit 13 - 49% full', './gtrash.svg'],
+								[18.905365, 72.807106, 'Unit 14 - 75% full', './gtrash.svg'],
+								[18.906289, 72.806677, 'Unit 15 - 23% full', './gtrash.svg'],
+								[18.907496, 72.808040, 'Unit 16 - 32% full', './gtrash.svg'],
+								[18.904949, 72.805315, 'Unit 17 - 27% full', './gtrash.svg'],
+								[18.896046, 72.813554, 'Unit 18 - 53% full', './gtrash.svg'],
+								[18.902188, 72.807450, 'Unit 19 - 74% full', './gtrash.svg'],
+								[18.900339, 72.811314, 'Unit 20 - 68% full', './gtrash.svg']
+
+							];
+
+							// loop through locations and add to map
+							for (var i = 0; i < locations.length; i++) {
+								// get current location
+								var location = locations[i];
+
+								// create map position
+								var position = new google.maps.LatLng(location[0], location[1]);
+
+								// add position to bounds
+								bounds.extend(position);
+
+								// create marker (https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions)
+								var marker = new google.maps.Marker({
+									animation: google.maps.Animation.DROP
+									, icon: locations[i][3]
+									, map: map
+									, position: position
+									, title: locations[i][2]
+								});
+
+								// create info window and add to marker (https://developers.google.com/maps/documentation/javascript/reference#InfoWindowOptions)
+								google.maps.event.addListener(marker, 'click', (
+									function (marker, i) {
+										return function () {
+											var infowindow = new google.maps.InfoWindow();
+											infowindow.setContent(locations[i][2]);
+											infowindow.open(map, marker);
+										}
+									}
+								)(marker, i));
+							};
+
+							// fit map to bounds
+							map.fitBounds(bounds);
+
+							const flightPlanCoordinates = [
+								{ lat: 18.909573, lng: 72.817241 },
+								{ lat: 18.909799, lng: 72.813347 },
+								{ lat: 18.908372, lng: 72.812453 },
+								{ lat: 18.907456, lng: 72.809917 },
+								{ lat: 18.906944, lng: 72.812568 },
+								{ lat: 18.906438, lng: 72.814472 },
+								{ lat: 18.902478, lng: 72.815011 },
+
+
+							];
+
+
+							const flightPath = new google.maps.Polyline({
+								path: flightPlanCoordinates,
+								geodesic: true,
+								strokeColor: "4d9ff7",
+								strokeOpacity: 0.9,
+								strokeWeight: 5,
+							});
+
+							flightPath.setMap(map);
+
+						}
+
+						// load map after page has finished loading
+						function loadScript() {
+							var script = document.createElement("script");
+							script.type = "text/javascript";
+							script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyCTBe4DTrCcXr7UmBdP6i-IY14C3qRCnq4&sensor=false&callback=initialise"; // initialize method called using callback parameter
+							document.body.appendChild(script);
+						}
+						window.onload = loadScript;</script>
+
+					<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
+						<div class="card flex-fill w-100">
+							
+						</div>
+					</div>
+
+
+					<!--THE BIG CHART OF UNITES-->
+					<div class="row">
+						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
+							<div class="card flex-fill">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Trees Planted</h5>
+								</div>
+								<table class="table table-hover my-0">
+									<thead>
+										<tr>
+											<th>Unit ID</th>
+											<th class="d-none d-xl-table-cell">Last Update</th>
+											<th>Location</th>
+											<th class="d-none d-md-table-cell">Status</th>
+											<!--<th class="d-none d-xl-table-cell">IDK</th>-->
+											<th>Zone</th>
+										</tr>
+									</thead>
+									<!--THIS IS WHERE YOU INPUT UNITS-->
+									<tbody>
+										<tr>
+											<td>Unit 1</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.906438, 72.814472</td>
+											<td><span class="badge bg-danger">89%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 2</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.906999, 72.816812</td>
+											<td><span class="badge bg-success">29%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 3</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.902478, 72.815011</td>
+											<td><span class="badge bg-danger">92%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 4</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.904831, 72.815814</td>
+											<td><span class="badge bg-success">22%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 5</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.906944, 72.812568</td>
+											<td><span class="badge bg-danger">90%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 6</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.909799, 72.813347</td>
+											<td><span class="badge bg-danger">82%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 7</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.909573, 72.817241</td>
+											<td><span class="badge bg-danger">81%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 8</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.910541, 72.820340</td>
+											<td><span class="badge bg-success">54%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 9</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.908372, 72.812453</td>
+											<td><span class="badge bg-danger">95%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 10</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.909002, 72.811915</td>
+											<td><span class="badge bg-success">43%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 11</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.910176, 72.810239</td>
+											<td><span class="badge bg-success">31%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 12</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.907456, 72.809917</td>
+											<td><span class="badge bg-danger">100%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 13</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:16 pm</td>
+											<td>18.907476, 72.808061</td>
+											<td><span class="badge bg-success">49%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 14</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.905365, 72.807106</td>
+											<td><span class="badge bg-success">75%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 15</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.906289, 72.806677</td>
+											<td><span class="badge bg-success">23%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 16</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.907496, 72.808040</td>
+											<td><span class="badge bg-success">32%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 17</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.904949, 72.805315</td>
+											<td><span class="badge bg-success">27%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 18</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:15 pm</td>
+											<td>18.896046, 72.813554</td>
+											<td><span class="badge bg-success">53%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 19</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:16 pm</td>
+											<td>18.902188, 72.807450</td>
+											<td><span class="badge bg-success">74%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+										<tr>
+											<td>Unit 20</td>
+											<td class="d-none d-xl-table-cell">11/10/2021, 4:14 pm</td>
+											<td>18.900339, 72.811314</td>
+											<td><span class="badge bg-success">68%</span></td>
+											<td>South Mumbai</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+
+
+					</div>
+
+				</div>
+			</main>
+
+
+
+		</div>
+	</div>
+
+	<script src="js/app.js"></script>
+
+	<script>document.addEventListener("DOMContentLoaded", function () {
+			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
+			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+			// Line chart
+			new Chart(document.getElementById("chartjs-dashboard-line"), {
+				type: "line",
+				data: {
+					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					datasets: [{
+						label: "Sales ($)",
+						fill: true,
+						backgroundColor: gradient,
+						borderColor: window.theme.primary,
+						data: [
+							2115,
+							1562,
+							1584,
+							1892,
+							1587,
+							1923,
+							2566,
+							2448,
+							2805,
+							3438,
+							2917,
+							3327
+						]
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					tooltips: {
+						intersect: false
+					},
+					hover: {
+						intersect: true
+					},
+					plugins: {
+						filler: {
+							propagate: false
+						}
+					},
+					scales: {
+						xAxes: [{
+							reverse: true,
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								stepSize: 1000
+							},
+							display: true,
+							borderDash: [3, 3],
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}]
+					}
+				}
+			});
+		});</script>
+	<script>document.addEventListener("DOMContentLoaded", function () {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie"), {
+				type: "pie",
+				data: {
+					labels: ["Chrome", "Firefox", "IE"],
+					datasets: [{
+						data: [4306, 3801, 1689],
+						backgroundColor: [
+							window.theme.primary,
+							window.theme.warning,
+							window.theme.danger
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		});</script>
+	<script>document.addEventListener("DOMContentLoaded", function () {
+			// Bar chart
+			new Chart(document.getElementById("chartjs-dashboard-bar"), {
+				type: "bar",
+				data: {
+					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					datasets: [{
+						label: "This year",
+						backgroundColor: window.theme.primary,
+						borderColor: window.theme.primary,
+						hoverBackgroundColor: window.theme.primary,
+						hoverBorderColor: window.theme.primary,
+						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+						barPercentage: .75,
+						categoryPercentage: .5
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+							gridLines: {
+								display: false
+							},
+							stacked: false,
+							ticks: {
+								stepSize: 20
+							}
+						}],
+						xAxes: [{
+							stacked: false,
+							gridLines: {
+								color: "transparent"
+							}
+						}]
+					}
+				}
+			});
+		});</script>
+
+
+
+	<!--############################################################################-->
+	<script>document.addEventListener("DOMContentLoaded", function () {
+			var markers = [{
+				coords: [31.230391, 121.473701],
+				name: "Shanghai"
+			},
+			{
+				coords: [28.704060, 77.102493],
+				name: "Delhi"
+			},
+			{
+				coords: [6.524379, 3.379206],
+				name: "Lagos"
+			},
+			{
+				coords: [35.689487, 139.691711],
+				name: "Tokyo"
+			},
+			{
+				coords: [23.129110, 113.264381],
+				name: "Guangzhou"
+			},
+			{
+				coords: [40.7127837, -74.0059413],
+				name: "New York"
+			},
+			{
+				coords: [34.052235, -118.243683],
+				name: "Los Angeles"
+			},
+			{
+				coords: [41.878113, -87.629799],
+				name: "Chicago"
+			},
+			{
+				coords: [51.507351, -0.127758],
+				name: "London"
+			},
+			{
+				coords: [40.416775, -3.703790],
+				name: "Madrid "
+			}
+			];
+			var map = new jsVectorMap({
+				map: "world",
+				selector: "#world_map",
+				zoomButtons: true,
+				markers: markers,
+				markerStyle: {
+					initial: {
+						r: 9,
+						strokeWidth: 7,
+						stokeOpacity: .4,
+						fill: window.theme.primary
+					},
+					hover: {
+						fill: window.theme.primary,
+						stroke: window.theme.primary
+					}
+				},
+				zoomOnScroll: false
+			});
+			window.addEventListener("resize", () => {
+				map.updateSize();
+			});
+		});</script>
+
+
+
+
+
+	<script>document.addEventListener("DOMContentLoaded", function () {
+			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
+			document.getElementById("datetimepicker-dashboard").flatpickr({
+				inline: true,
+				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
+				nextArrow: "<span title=\"Next month\">&raquo;</span>",
+				defaultDate: defaultDate
+			});
+		});</script>
+
+	<!--############################################################################-->
+
+
+	<!--
+	<div id="map_canvas"><noscript><p>JavaScript is required to render the Google Map.</p></noscript></div>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<style type="text/css">
+		html {
+			height: 100%;
+		}
+
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#map_canvas {
+			width: 800px;
+			height: 600px;
+		}
+	</style>
+
+	<script type="text/javascript">function initialise() {
+			// create object literal to store map properties
+			var myOptions = {
+				zoom: 8 // set zoom level
+				, mapTypeId: google.maps.MapTypeId.ROADMAP // apply tile (options include ROADMAP, SATELLITE, HYBRID and TERRAIN)
+			};
+
+			// create map object and apply properties
+			var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+			// create map bounds object
+			var bounds = new google.maps.LatLngBounds();
+
+			// create array containing locations
+			var locations = [
+				[18.906438, 72.814472, 'Unit 1 - 89% full', './rtrash.svg'],
+				[18.906999, 72.816812, 'Unit 2 - 29% full', './gtrash.svg'],
+				[18.902478, 72.815011, 'Unit 3 - 92% full', './rtrash.svg'],
+				[18.904831, 72.815814, 'Unit 4 - 22% full', './gtrash.svg'],
+				[18.906944, 72.812568, 'Unit 5 - 90% full', './rtrash.svg'],
+				[18.909799, 72.813347, 'Unit 6 - 82% full', './rtrash.svg'],
+				[18.909573, 72.817241, 'Unit 7 - 81% full', './rtrash.svg'],
+				[18.910541, 72.820340, 'Unit 8 - 54% full', './gtrash.svg'],
+				[18.908372, 72.812453, 'Unit 9 - 95% full', './rtrash.svg'],
+				[18.909002, 72.811915, 'Unit 10 - 43% full', './gtrash.svg'],
+				[18.910176, 72.810239, 'Unit 11 - 31% full', './gtrash.svg'],
+				[18.907456, 72.809917, 'Unit 12 - 100% full', './rtrash.svg'],
+				[18.907476, 72.808061, 'Unit 13 - 49% full', './gtrash.svg'],
+				[18.905365, 72.807106, 'Unit 14 - 75% full', './gtrash.svg'],
+				[18.906289, 72.806677, 'Unit 15 - 23% full', './gtrash.svg'],
+				[18.907496, 72.808040, 'Unit 16 - 32% full', './gtrash.svg'],
+				[18.904949, 72.805315, 'Unit 17 - 27% full', './gtrash.svg'],
+				[18.896046, 72.813554, 'Unit 18 - 53% full', './gtrash.svg'],
+				[18.902188, 72.807450, 'Unit 19 - 74% full', './gtrash.svg'],
+				[18.900339, 72.811314, 'Unit 20 - 68% full', './gtrash.svg']
+
+			];
+
+			// loop through locations and add to map
+			for (var i = 0; i < locations.length; i++) {
+				// get current location
+				var location = locations[i];
+
+				// create map position
+				var position = new google.maps.LatLng(location[0], location[1]);
+
+				// add position to bounds
+				bounds.extend(position);
+
+				// create marker (https://developers.google.com/maps/documentation/javascript/reference#MarkerOptions)
+				var marker = new google.maps.Marker({
+					animation: google.maps.Animation.DROP
+					, icon: locations[i][3]
+					, map: map
+					, position: position
+					, title: locations[i][2]
+				});
+
+				// create info window and add to marker (https://developers.google.com/maps/documentation/javascript/reference#InfoWindowOptions)
+				google.maps.event.addListener(marker, 'click', (
+					function (marker, i) {
+						return function () {
+							var infowindow = new google.maps.InfoWindow();
+							infowindow.setContent(locations[i][2]);
+							infowindow.open(map, marker);
+						}
+					}
+				)(marker, i));
+			};
+
+			// fit map to bounds
+			map.fitBounds(bounds);
+
+			const flightPlanCoordinates = [
+				{ lat: 18.909573, lng: 72.817241 },
+				{ lat: 18.909799, lng: 72.813347 },
+				{ lat: 18.908372, lng: 72.812453 },
+				{ lat: 18.907456, lng: 72.809917 },
+				{ lat: 18.906944, lng: 72.812568 },
+				{ lat: 18.906438, lng: 72.814472 },
+				{ lat: 18.902478, lng: 72.815011 },
+
+
+			];
+
+
+			const flightPath = new google.maps.Polyline({
+				path: flightPlanCoordinates,
+				geodesic: true,
+				strokeColor: "4d9ff7",
+				strokeOpacity: 0.9,
+				strokeWeight: 5,
+			});
+
+			flightPath.setMap(map);
+
+		}
+
+		// load map after page has finished loading
+		function loadScript() {
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyCTBe4DTrCcXr7UmBdP6i-IY14C3qRCnq4&sensor=false&callback=initialise"; // initialize method called using callback parameter
+			document.body.appendChild(script);
+		}
+		window.onload = loadScript;</script>-->
+
+
+	
+
+
+
+</body>
+
+</html>
